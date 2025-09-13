@@ -11,6 +11,7 @@ import re
 import requests
 import sys
 import yaml
+import shutil
 
 from pathlib import Path
 from prompt_toolkit import PromptSession, HTML
@@ -273,6 +274,20 @@ def print_markdown(content: str, code_blocks: Optional[dict] = None):
         console.print(Markdown("\n".join(regular_content)))
 
 
+def print_messages(
+    config: dict, messages: dict, copyable_blocks: Optional[dict] = None
+):
+    for message_response in messages:
+        if not config["non_interactive"]:
+            console.line()
+        if config["markdown"]:
+            print_markdown(message_response["content"].strip(), copyable_blocks)
+        else:
+            print(message_response["content"].strip())
+            if not config["non_interactive"]:
+                console.line()
+
+
 def start_prompt(
     session: PromptSession,
     config: dict,
@@ -300,7 +315,18 @@ def start_prompt(
     if message.lower() == "":
         raise KeyboardInterrupt
 
-    if config["easy_copy"] and message.lower().startswith("/c"):
+    if not config["non_interactive"] and message.lower().lstrip().startswith("/r"):
+        if copyable_blocks is not None:
+            copyable_blocks.clear()
+        console.width = shutil.get_terminal_size().columns
+        if not config["non_interactive"]:
+            console.rule("History (including context):")
+        print_messages(config, messages, copyable_blocks)
+        if not config["non_interactive"]:
+            console.rule()
+        raise KeyboardInterrupt
+
+    if config["easy_copy"] and message.lower().lstrip().startswith("/c"):
         # Use regex to find digits after /c or /copy
         match = re.search(r"^/c(?:opy)?\s*(\d+)", message.lower())
         if match:
