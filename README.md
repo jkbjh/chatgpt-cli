@@ -101,6 +101,8 @@ Use the `/q` command to quit and show the number of total tokens used and an est
 
 Use the `/copy` (or `/c`) command to copy code blocks from the generated output. Specifically, `/copy` or `/c` followed by an integer copies the nth code block to the clipboard. Code blocks are labeled in the console output so that it is clear which index corresponds to which block. Running the `/copy` command without any arguments copies the entire contents of the previous response.
 
+Use the `/r` command to repeat all previous history (including system messages) and adjusting the console width (e.g.., after resizing a terminal emulator window).
+
 For displaying all the available commands check the help with `chatgpt-cli --help`
 
 ## Multiline input
