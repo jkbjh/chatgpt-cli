@@ -78,6 +78,12 @@ ChatGPT CLI, by default, uses the standard `gpt-4o` model. In order to use other
 | `gpt-4-0125-preview` | 0.01                  | 0.03                  |
 | `gpt-4-turbo`        | 0.01                  | 0.03                  |
 | `gpt-4o`             | 0.005                 | 0.015                 |
+| `gpt-5`              | 0.00125               | 0.01                  |
+| `gpt-5-mini`         | 0.00025               | 0.002                 |
+| `gpt-5-nano`         | 0.00005               | 0.0004                |
+| `gpt-5-chat-latest`  | 0.00125               | 0.01                  |
+| `gpt-5-codex`        | 0.00125               | 0.01                  |
+| `gpt-5-pro`          | 0.015                 | 0.12                  |
 | `o1-mini`            | 0.003                 | 0.012                 |
 | `o1-preview`         | 0.015                 | 0.06                  |
 | `o3-mini`            | 0.0011                | 0.0044                |
